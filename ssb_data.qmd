@@ -1,0 +1,70 @@
+---
+title: "SSB data"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(readxl)
+library(writexl)
+```
+
+```{r}
+ssb_10540 <- read_excel("data/10540.xlsx") |>
+fill(
+  # column to fill, Note use of c() when multiple columns
+  c(kom, alder),
+  # NOTE! .direction, NOT direction
+  .direction = "down"
+  ) |> 
+  rename(ledige = `Registrert helt arbeidsledige`) |> 
+  mutate(ledige = as.numeric(ledige))
+```
+
+```{r}
+#| paged.print: false
+ssb_10540 |>
+  filter(is.na(ledige)) 
+```
+
+```{r}
+write_xlsx(
+  x = ssb_10540,
+  path = "data/ssb_10540.xlsx"
+)
+
+write_csv(
+  x = ssb_10540,
+  file = "data/ssb_10540.csv"
+  )
+```
+
+## Leser inn csv filen laget ovenfor
+
+```{r}
+ssb_10540 <- read_csv("data/ssb_10540.csv", show_col_types = FALSE)
+```
+
+```{r}
+spec(ssb_10540)
+```
+
+## Leser inn csv fil fra SSB
+
+```{r}
+raw_10540 <- read_delim("data/raw_10540.csv", 
+    delim = ";", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
+    trim_ws = TRUE, skip = 1, show_col_types = FALSE) |> 
+  rename(ledige = `Registrert helt arbeidsledige`) |> 
+  mutate(ledige = as.numeric(ledige))
+```
+
+```{r}
+names(raw_10540)
+```
+
+```{r}
+# siste
+```
