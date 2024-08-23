@@ -1,0 +1,67 @@
+---
+title: "ggplot2"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+```
+
+```{r}
+ggplot() +
+  geom_point(data = mtcars,
+             mapping = aes(
+               x = disp, 
+               y = mpg, 
+               colour = factor(cyl), 
+               size = 3.6*(0.25*1609.347)/qsec,
+               shape = factor(ifelse(am, "Man", "Aut"))
+               )
+             ) +
+  labs(
+    colour = "cyl", 
+    alpha = "speed\n(km/h)", 
+    shape = "trans-\nmission"
+    )
+```
+
+```{r}
+ggplot() +
+  geom_point(
+    data = mtcars,
+    mapping = aes(
+      x = disp,
+      y = mpg, 
+      colour = factor(cyl), 
+      size = 3.6*(0.25*1609.347)/qsec, 
+      shape = factor(
+        # Note codeing am
+        # 0 automatic, 1 manual
+        ifelse(
+          am, 
+          "Aut", 
+          "Man"
+          )
+        )
+      )
+    ) +
+  labs(
+    colour = "cyl", 
+    size = "speed\n(km/h)", 
+    shape = "trans-\nmission"
+    ) +
+  geom_smooth(
+    formula = 'y ~ x',
+    method = 'lm',
+    data = mtcars, 
+    mapping = aes(x = disp, y = mpg)
+    )
+```
+
+SLIDE 13
+
+```{r}
+
+```
