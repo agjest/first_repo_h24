@@ -9,6 +9,7 @@ editor: visual
 library(tidyverse)
 library(readxl)
 library(writexl)
+library(PxWebApiData)
 ```
 
 ```{r}
@@ -63,6 +64,58 @@ raw_10540 <- read_delim("data/raw_10540.csv",
 
 ```{r}
 names(raw_10540)
+```
+
+## PxWebApiData
+
+```{r}
+metadata_10540 <- ApiData(
+  "http://data.ssb.no/api/v0/en/table/10540",
+  returnMetaFrames = TRUE
+  )
+```
+
+```{r}
+#| paged.print: false
+#| eval: false
+metadata_10540 |> View()
+```
+
+```{r}
+#| eval: false
+#Get more info about table
+ApiData(
+"http://data.ssb.no/api/v0/en/table/10540",
+returnApiQuery = TRUE
+) 
+```
+
+```{r}
+unemp99to10_for_11_46 <- ApiData12(
+  "http://data.ssb.no/api/v0/en/table/10540",
+  # Have not been able to specify more complex regions
+  Region = list(c("11*", "46*")),
+  Tid = paste0(
+    rep(1999:2010, each = 12), 
+    "M",
+    sprintf("%02d", 1:12)
+    )
+  ) |>
+  select(Region, region, Tid, Alder, "ledige" = value) |>
+  as_tibble()
+```
+
+```{r}
+names(unemp99to02)
+```
+
+```{r}
+# save it as csv
+write.table(unemp99to10_for_11_46,
+  file = "data/unemp99to10_for_11_46.csv",
+  dec = ".",
+  sep = ","
+)
 ```
 
 ```{r}
