@@ -1,0 +1,13 @@
+---
+title: "Bruk av Zotero"
+format: 
+  html: default
+  pdf: default
+  docx: default
+editor: visual
+bibliography: "ds_h24.bib"
+---
+
+## Siteringer i Quarto dokument
+
+Legger inn referansen @thorsen1999 og til slutt [@Osland_Gjestland_Thorsen_2020].
