@@ -6,11 +6,10 @@ editor: visual
 
 ## Quarto
 
-Quarto enables you to weave together content and executable code into a finished document.
+Quarto enables you table code into a finished document.
 To learn more about Quarto see <https://quarto.org>.
 
-Quarto enables you to weave together content and executable code into a finished document.
-To learn more about Quarto see <https://quarto.org>.
+Quarto enables you to weave together content and executable 
 
 ## Running Code
 
@@ -21,6 +20,7 @@ You can embed code like this:
 1 + 1
 ```
 
-You can  like this add options to executable code
+The `echo: false` option disabblles the printing of code (only output is displayed).
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+You can  like this add options to executable code
