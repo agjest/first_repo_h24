@@ -17,3 +17,5 @@ You can embed code like this:
 The `echo: false` option disables the printing of code (only output is displayed).
 
 Dette er bare noe ny tekst for å teste merging i RStudio.
+
+En setning til lagt til.
