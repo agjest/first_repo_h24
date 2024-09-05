@@ -1,0 +1,21 @@
+---
+title: "Reproduserbarhet"
+author: "Arnstein Gjestland"
+format: 
+  html: default
+  pdf: default
+  docx: default
+editor: visual
+---
+
+## Sammendrag (abstract)
+
+## Innledning
+
+## Litteraturstudie
+
+## Diskusjon av problemstilling
+
+## Konklusjon
+
+## Referanser
