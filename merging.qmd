@@ -1,12 +1,15 @@
 ---
-title: "Merging i git"
+title: "Untitled"
 format: html
 editor: visual
 ---
 
 ## Quarto
 
-Quarto enables you, more drastic changes needed, to make content better to executable code into a finished document.
+Quarto enables you to weave together content and executable code into a finished document.
+To learn more about Quarto see <https://quarto.org>.
+
+Quarto enables you to weave together content and executable code into a finished document.
 To learn more about Quarto see <https://quarto.org>.
 
 ## Running Code
@@ -14,11 +17,15 @@ To learn more about Quarto see <https://quarto.org>.
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code.
 You can embed code like this:
 
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
 The `echo: false` option disables the printing of code (only output is displayed).
-
-Dette er bare noe ny tekst for å teste merging i RStudio.
-
-En setning til lagt til.
-
-En kopi av et avsnitt er: When you click the **Render** button a 
-
