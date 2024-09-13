@@ -1,0 +1,35 @@
+---
+title: "Can Quarto documents help to insure reproducibility and replicability in research?"
+author: "AG"
+date: last-modified
+date-format: "dddd D MMM, YYYY"
+csl: apa7.csl
+lang: en
+format:
+  html: default
+  pdf:
+    documentclass: article
+    number-sections: true
+    keep-tex: true
+    papersize: A4
+    fig-pos: "H"
+bibliography: reproducibility.bib
+abstract-title: "Abstract"
+abstract: "My very short abstract"
+---
+
+## Introduction
+
+Some smart stuff
+
+## Literature review
+
+Smart stuff from others
+
+## Discussion of the reseach question with some catching heading
+
+## Conclusion
+
+## References
+
+

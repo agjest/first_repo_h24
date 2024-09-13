@@ -1,0 +1,32 @@
+---
+title: "EDA"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(flextable)
+library(skimr)
+```
+
+```{r}
+my_heights <- modelr::heights
+```
+
+```{r}
+summary(my_heights)
+```
+
+```{r}
+# NAs in my_heights?
+my_heights %>% 
+  apply(MARGIN = 2, FUN = is.na) %>% 
+  apply(MARGIN = 2, FUN = sum) 
+```
+
+
+
+
+

@@ -1,0 +1,121 @@
+---
+title: "Wrangling"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+```
+
+```{r}
+#| paged.print: false
+as_tibble(mtcars, rownames = "Models")
+```
+
+```{r}
+#| paged.print: false
+table3
+```
+
+```{r}
+#| paged.print: false
+table2
+```
+
+```{r}
+#| paged.print: false
+table4a
+```
+
+```{r}
+#| paged.print: false
+table4b
+```
+
+```{r}
+#| paged.print: false
+table1
+```
+
+
+```{r}
+#| paged.print: false
+# cases per 100.000
+(table1 <- table1 %>% 
+  mutate(
+    rate = round((cases/population) * 100000,
+                 digits = 3)
+    ))
+```
+
+```{r}
+#| paged.print: false
+table1 %>% 
+  count(year, wt = cases)
+```
+
+```{r}
+#| paged.print: false
+table1 %>% 
+  group_by(year) |> 
+  summarise(sum(cases))
+```
+
+
+
+```{r}
+# Some changes from Wicham
+# embrace the pipe!
+table1 %>% 
+ggplot(mapping = aes(
+  x = parse_date(
+    as.character(year),
+    format = "%Y"
+    ),
+  y = rate,
+  colour = country
+  )
+  ) + 
+  geom_line(mapping = aes(group = country)) + 
+  geom_point() + 
+  xlab("Time") +
+  ylab("Rate per 100000") +
+  theme(legend.position = "bottom")
+```
+
+```{r}
+table4a
+```
+
+
+
+```{r}
+#| paged.print: false
+tidy4a <- table4a %>% 
+  pivot_longer(cols = -country,
+               names_to = "year", 
+               values_to = "cases")
+tidy4a
+```
+
+```{r}
+#| paged.print: false
+tidy4a <- table4a %>% 
+  pivot_longer(cols = c(`1999`, `2000`),
+               names_to = "year", 
+               values_to = "cases")
+tidy4a
+```
+
+
+```{r}
+#| paged.print: false
+tidy4a <- table4a %>% 
+  pivot_longer(cols = `1999`:`2000`,
+               names_to = "year", 
+               values_to = "cases")
+tidy4a
+```
+

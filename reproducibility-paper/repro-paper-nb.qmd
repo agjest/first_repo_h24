@@ -1,0 +1,34 @@
+---
+title: "Kan Quarto dokumenter hjelpe oss å sikre reproduserbarhet og replikerbarhet innen forskning?"
+author: "AG"
+date: last-modified
+date-format: "dddd D MMM, YYYY"
+csl: apa7.csl
+lang: nb
+format:
+  html: default
+  pdf:
+    documentclass: article
+    number-sections: true
+    keep-tex: true
+    papersize: A4
+    fig-pos: "H"
+bibliography: reproducibility.bib
+abstract: "Et svært kort sammendrag."
+---
+
+## Introduction
+
+Some smart stuff
+
+## Literature review
+
+Smart stuff from others
+
+## Discussion of the reseach question with some catching heading
+
+## Conclusion
+
+## References
+
+
