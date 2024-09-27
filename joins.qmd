@@ -1,0 +1,188 @@
+---
+title: "joins"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(nycflights13)
+```
+
+```{r}
+#| paged.print: false
+head(airlines, n = 3)
+```
+
+```{r}
+flights %>% 
+  select(year:day, carrier, everything()) %>% 
+  group_by(carrier) %>% 
+  summarise(first(dep_time)) %>% 
+  head(, n= 3)
+```
+
+```{r}
+#| paged.print: false
+flights <- nycflights13::flights
+flights <- flights %>% 
+  left_join(airlines, by = "carrier")
+
+flights %>% 
+  select(carrier, name, everything()) %>% 
+  head(3)
+```
+
+```{r}
+nmf <- names(flights)
+nmf[nmf %in% names(planes)]
+```
+
+```{r}
+#| paged.print: false
+flights <- flights %>% 
+  left_join(planes, by = "tailnum", 
+            suffix = c("", "_plane"))
+
+flights %>% 
+  select(tailnum, model, 
+         year_plane, year, everything()) %>% 
+  head(n = 3)
+```
+
+```{r}
+#| paged.print: false
+flights |> 
+  select(origin) |>
+  unique()
+```
+
+```{r}
+#| paged.print: false
+flights |> 
+  select(dest) |>
+  unique() |> 
+  View()
+```
+
+```{r}
+nmf <- names(flights)
+nmf[nmf %in% names(airports)]
+```
+
+```{r}
+head(flights$name, n = 4)
+```
+
+```{r}
+head(airports$name, n = 4)
+```
+
+```{r}
+flights <- flights %>% 
+  left_join(airports, 
+            by = c("origin" = "faa"), 
+            suffix = c("_airline", "_origin_airport"), 
+            keep = TRUE
+            ) %>% 
+  select(year:day, name_airline, name_origin_airport, everything())
+head(flights, n = 3)
+```
+
+```{r}
+names(flights)
+```
+
+```{r}
+names(airports)
+```
+
+```{r}
+nmf <- names(flights)
+nmf[nmf %in% names(airports)]
+```
+
+```{r}
+#| paged.print: false
+#work with tmp until correct then 
+#change to my_flights
+flights <- flights %>% 
+  left_join(airports, 
+            by = c("dest" = "faa"),
+            suffix = c("_origin", "_dest"),
+            keep = FALSE
+            ) %>% 
+  rename(name_dest_airport = name) %>% 
+  select(faa, origin, dest, lat_origin, lat_dest, everything()) 
+```
+
+```{r}
+weather |> filter(origin == "EWR") |> select(hour) |> table()
+```
+
+```{r}
+weather |> filter(origin == "JFK") |> select(hour) |> table()
+```
+
+```{r}
+weather |> filter(origin == "LGA") |> select(hour) |> table()
+```
+
+```{r}
+{set.seed(666)
+(x <- sample(flights$dep_time, size = 30))}
+```
+
+```{r}
+x <- str_pad(x, width = 4, side = "left", pad = "0")
+x
+```
+
+```{r}
+(x <- as.numeric(str_sub(x, start = 1, end = 2)))
+```
+
+```{r}
+fix_dep_time <- function(x) {
+  x = str_pad(x, width = 4, side = "left", pad = "0")
+  x = str_sub(x, start = 1, end = 2)
+  # This is correct since hour 0: 23 in weather dataset
+  # Note that not all days have hour = 0
+  x = as.integer(x)
+  return(x)
+  }
+```
+
+```{r}
+flights <- flights %>% 
+  mutate(
+    dep_time_hour = fix_dep_time(dep_time)
+  )
+```
+
+```{r}
+nmf <- names(flights)
+nmf[nmf %in% names(weather)]
+```
+
+```{r}
+flights <- flights %>% 
+  left_join(weather, 
+            by = c("origin", "year", "month", "day", "dep_time_hour" = "hour"),
+            suffix = c("", "_weather"), 
+            keep = FALSE
+            )
+```
+
+```{r}
+flights <- flights %>% 
+  select(year, month, day, dep_time, everything()) %>% 
+  print(width = 75)
+```
+
+```{r}
+#| paged.print: false
+flights |>   print(width = 70)
+```

@@ -1,10 +1,10 @@
 ---
-title: "Kan Quarto dokumenter hjelpe oss å sikre reproduserbarhet og replikerbarhet innen forskning?"
+title: "How can Quarto documents help with reproducibility in research?"
 author: "AG"
 date: last-modified
 date-format: "dddd D MMM, YYYY"
 csl: apa7.csl
-lang: nn
+lang: en-GB
 format:
   html: default
   pdf:
@@ -14,7 +14,7 @@ format:
     papersize: A4
     fig-pos: "H"
 bibliography: reproducibility.bib
-abstract: "Et svært kort sammendrag."
+abstract: "A very short abstract."
 ---
 
 ## Introduction
@@ -26,6 +26,13 @@ Some smart stuff
 Smart stuff from others
 
 ## Discussion of the reseach question with some catching heading
+
+### How can Quarto documents help with reproducibility?
+
+### What problems remains and how can these be solved?
+
+- Package version
+- R version, library versions
 
 ## Conclusion
 

@@ -1,0 +1,99 @@
+---
+title: "Strings"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(readtext)
+```
+
+
+```{r}
+string1 <- "test1"
+string2 <- 'test2'
+string3 <- "\'test3\'"
+string4 <- "'test4'"
+string5 <- "first\nsecond"
+string6 <- "first\tsecond"
+```
+
+```{r}
+writeLines(string1)
+```
+```{r}
+string1
+```
+```{r}
+writeLines(string2)
+```
+
+```{r}
+writeLines(string3)
+```
+
+```{r}
+string3b <- "'test3'"
+```
+
+```{r}
+writeLines(string3b)
+```
+
+```{r}
+writeLines(string5)
+```
+
+```{r}
+writeLines(string6)
+```
+
+
+```{r}
+x <- c(321, 12111, 1978)
+y <- str_replace(x, pattern = "1", replacement = "9");y
+```
+
+```{r}
+xx <- c(9321, 12991, 222, 1978)
+```
+
+
+```{r}
+str_extract(xx, pattern = "9")
+```
+
+
+
+```{r}
+str_extract_all(xx, pattern = "9")
+```
+
+```{r}
+z <- str_replace_all(y, pattern = "9", replacement = "ab");z
+```
+
+
+```{r}
+# * betyr null eller flere, alpha er STORE og små bokstaver
+str_extract(z, pattern = "[:alpha:]*(\\d*)", group = 1)
+```
+
+```{r}
+# + betyr 1 eller flere, alpha er STORE og små bokstaver
+str_extract(z, pattern = "[:alpha:]+(\\d*)", group = 1)
+```
+
+```{r}
+z
+```
+
+
+```{r}
+str_extract(z, pattern = "[:alpha:]?(\\d*)", group = 1)
+```
+
+

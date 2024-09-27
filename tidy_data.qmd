@@ -118,4 +118,141 @@ tidy4a <- table4a %>%
                values_to = "cases")
 tidy4a
 ```
+```{r}
+#| paged.print: false
+table4b
+```
+
+```{r}
+#| paged.print: false
+tidy4b <- table4b %>% 
+  pivot_longer(
+    cols = -country,
+    names_to = "year",
+    values_to = "pop"
+  )
+tidy4b
+```
+
+```{r}
+#| paged.print: false
+table2
+```
+
+
+```{r}
+#| paged.print: false
+tidy2 <- table2 %>% 
+  pivot_wider(names_from = type,
+              values_from = count)
+
+tidy2
+```
+
+```{r}
+#| paged.print: false
+table3
+```
+
+```{r}
+#| paged.print: false
+tidy3 <- table3 %>% 
+  separate(col = rate,
+           into = c("cases", "pop"),
+           sep = "/",
+           convert = TRUE
+           )
+tidy3[1:5,]
+```
+
+```{r}
+#| paged.print: false
+tidy3century <- tidy3 %>% 
+  separate(col = year,
+           into = c("century", "year"),
+           sep = 2
+           )
+tidy3century
+
+```
+
+```{r}
+#| paged.print: false
+tidy3century_alt <- tidy3 %>% 
+  separate(col = year,
+           into = c("century", "year"),
+           sep = -2
+           )
+tidy3century_alt
+```
+
+
+```{r}
+#| paged.print: false
+tidy3century %>% 
+  unite(
+    col = "year",
+    century, year, # the columns we want to unite
+    sep = "" # what happens witout sep?
+  )
+```
+
+```{r}
+treatment <- tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  "Katherine Burke",  1,           4
+)
+treatment
+
+```
+
+```{r}
+treatment %>% 
+  fill(person, .direction = c("down"))
+```
+
+```{r}
+treatment %>% 
+  fill(person, .direction = c("up"))
+```
+
+```{r}
+View(who)
+```
+
+```{r}
+#| paged.print: false
+tidy_who <- who %>% 
+  pivot_longer(cols = -c(1:4),
+               names_to = "key",
+               values_to = "cases",
+               values_drop_na = TRUE
+               ) |> 
+  arrange(country, year, key) |>
+  mutate(
+    key = str_replace(key, "newrel", "new_rel")
+  ) |> 
+  separate(col = key,
+           into = c("new", "type", "sexage"),
+           sep = "_"
+           ) |> 
+  select(-new) |> 
+  separate(col = sexage,
+           into = c("sex", "age"),
+           sep = 1
+           ) |> 
+  mutate(
+    age = str_replace(age, "014", "0014"),
+    age = str_replace(age, "65", "6599")
+  ) |> 
+  separate(col = age,
+           into = c("age_start", "age_end"),
+           sep = 2
+           ) |> 
+  select(-iso2, -iso3) |> 
+  rename(met_diag = type)
+```
 
